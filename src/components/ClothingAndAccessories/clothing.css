@@ -1,0 +1,195 @@
+.content {
+  display: flex;
+  min-height: 100vh;
+}
+
+.filter {
+  width: 15%;
+  border-right: 10px solid #efedf2;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.cards {
+  width: 85%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.clear {
+  float: right;
+  color: rgb(40, 116, 240);
+  font-size: smaller;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.flter-head {
+  border-bottom: 3px solid rgb(240, 242, 245);
+  padding-bottom: 5px;
+}
+
+.filter-body {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="checkbox"] {
+  margin-bottom: 15px;
+}
+
+input[type="checkbox"]:hover {
+  cursor: pointer;
+}
+
+.text {
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  text-indent: 2%;
+  color: rgb(10, 116, 24);
+  border-bottom: 3px solid rgb(240, 242, 245);
+  height: fit-content;
+}
+
+.filterImg {
+  display: none;
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+  .filter {
+    width: 20%;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .cards {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .filter {
+    width: 30%;
+  }
+
+  .cards {
+    width: 70%;
+  }
+
+  .flter-head {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .filter {
+    display: none;
+  }
+
+  .flter-head {
+    background-color: rgb(40, 116, 240);
+    color: #fff;
+    height: 50px;
+    margin-top: 0;
+    padding: 0;
+    border: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .flter-head>span:first-child {
+    margin-left: 2.5rem;
+    font-size: 14px;
+    font-weight: 100;
+  }
+
+  .flter-head>span:last-child {
+    margin-right: 1rem;
+    font-weight: 100;
+  }
+
+  .clear {
+    color: #fff;
+  }
+
+  .cards {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .text {
+    display: flex;
+    justify-content: space-between;
+    text-indent: 0;
+    margin: 0 1rem;
+    height: fit-content;
+  }
+
+  .filterImg {
+    display: flex;
+    display: flex;
+    align-items: center;
+  }
+
+  .filterImg img {
+    height: 18px;
+    margin-right: 1px;
+  }
+
+  .filter-content {
+    padding-left: 1rem;
+  }
+
+  input[type="checkbox"] {
+    margin-bottom: 15px;
+    margin-top: 10px;
+    margin-left: 6px;
+  }
+
+  .label>span {
+    margin-left: 2px;
+  }
+
+  .filter-footer {
+    padding: 10px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    background: #fff;
+    font-size: 15px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 -2px 2px 0 rgb(0 0 0 / 30%);
+  }
+
+  .button {
+    background: rgb(251, 100, 27);
+    width: 150px;
+    color: white;
+    padding: 12px 15px 11px;
+    border: 0;
+    outline: 0;
+    display: inline-block;
+    text-transform: capitalize;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
+    line-height: 14px;
+  }
+
+  h4 {
+    margin-top: 14px;
+    margin-bottom: 14px;
+  }
+}
