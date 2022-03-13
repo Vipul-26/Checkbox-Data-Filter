@@ -1,3 +1,4 @@
+import React from 'react';
 import Header from './components/Header/index';
 import ClothingAndAccessories from './components/ClothingAndAccessories';
 import Footer from './components/Footer/index';
