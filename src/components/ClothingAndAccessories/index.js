@@ -4,10 +4,18 @@ import "./clothing.css";
 import Data from "../../data.json";
 import filterImage from '../../images/logo/filter.png';
 import Modal from "../Modal";
+import { ReactComponent as CaretIcon } from '../../icons/caret.svg';
+import Pagination from "../Pagination";
 
 const array = [...Data];
 
 const ClothingAndAccessories = () => {
+
+  let [sort, setSort] = useState(false);
+  let [perPage, setPerPage] = useState(false);
+
+  let [sortText, setSortText] = useState("Sort By Price");
+  let [perPageText, setPerPageText] = useState("12 per page");
 
   let [arr, setArr] = useState([...array]);
 
@@ -90,123 +98,215 @@ const ClothingAndAccessories = () => {
     }
   };
 
+  const handleSort = () => {
+    setSort(!sort);
+    setPerPage(false);
+  };
+
+  const handlePerPage = () => {
+    setPerPage(!perPage);
+    setSort(false);
+  };
+
+  const handleSortText = (e) => {
+    setSortText(e.target.value);
+    setSort(false);
+  };
+
+  const handlePerPageText = (e) => {
+    setPerPageText(e.target.value);
+    setPerPage(false);
+  };
+
   return (
-    <div className="content">
-      {isOpen &&
-        <Modal
-          isOpen={isOpen}
-          onCloseModal={toggleModal}
-          handleClear={handleClear}
-        >
-          <div className="filterModal">
-            <h4 className="flter-head">
-              <span>
-                Filters
-              </span>
-              <span className="clear" onClick={handleClear}>
-                Clear
-              </span>
-            </h4>
-            <div className="filter-content">
-              <div className="filter-body">
-                <h4>
-                  CATEGORY
-                </h4>
-                {category_items.map((data, index) => (
-                  <label className="label">
-                    <input type="checkbox" value={data.name} checked={data.applied} onChange={(e) => handleFilter(1, index)} />
-                    <span>
-                      {data.name}
-                    </span>
-                  </label>
-                ))}
+    <>
+      <div className="content">
+        {isOpen &&
+          <Modal
+            isOpen={isOpen}
+            onCloseModal={toggleModal}
+            handleClear={handleClear}
+          >
+            <div className="filterModal">
+              <h4 className="flter-head">
+                <span>
+                  Filters
+                </span>
+                <span className="clear" onClick={handleClear}>
+                  Clear
+                </span>
+              </h4>
+              <div className="filter-content">
+                <div className="filter-body">
+                  <h4>
+                    CATEGORY
+                  </h4>
+                  {category_items.map((data, index) => (
+                    <label className="label">
+                      <input type="checkbox" value={data.name} checked={data.applied} onChange={(e) => handleFilter(1, index)} />
+                      <span>
+                        {data.name}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+                <div className="filter-body">
+                  <h4>
+                    RATING
+                  </h4>
+                  {rating_items.map((data, index) => (
+                    <label className="label">
+                      <input type="checkbox" value={data.name} checked={data.applied} onChange={(e) => handleFilter(2, index)} />
+                      <span>
+                        {data.name}
+                      </span>
+                    </label>
+                  ))}
+                </div>
               </div>
-              <div className="filter-body">
-                <h4>
-                  RATING
-                </h4>
-                {rating_items.map((data, index) => (
-                  <label className="label">
-                    <input type="checkbox" value={data.name} checked={data.applied} onChange={(e) => handleFilter(2, index)} />
-                    <span>
-                      {data.name}
-                    </span>
-                  </label>
-                ))}
+              <div className="filter-footer">
+                <button className="button" onClick={handleApply}>
+                  Apply
+                </button>
               </div>
             </div>
-            <div className="filter-footer">
-              <button className="button" onClick={handleApply}>
-                Apply
-              </button>
-            </div>
-          </div>
-        </Modal>
-      }
-      <div className="filter">
-        <h4 className="flter-head">
-          <span>
-            Filters
-          </span>
-          <span className="clear" onClick={handleClear}>
-            CLEAR All
-          </span>
-        </h4>
-        <div className="filter-content">
-          <div className="filter-body">
-            <h4>
-              CATEGORY
-            </h4>
-            {category_items.map((data, index) => (
-              <label>
-                <input type="checkbox" value={data.name} checked={data.applied} onChange={(e) => handleFilter(1, index)} />
-                <span>
-                  {data.name}
-                </span>
-              </label>
-            ))}
-          </div>
-          <div className="filter-body">
-            <h4>
-              RATING
-            </h4>
-            {rating_items.map((data, index) => (
-              <label>
-                <input type="checkbox" value={data.name} checked={data.applied} onChange={(e) => handleFilter(2, index)} />
-                <span>
-                  {data.name}
-                </span>
-              </label>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="cards">
-        <div className="text">
-          <p>
-            Showing 1 - {arr.length} of{" "} {arr.length} results
-          </p>
-          <div className="filterImg">
-            <img src={filterImage} alt="filter" />
-            <p onClick={handleModal}>
+          </Modal>
+        }
+        <div className="filter">
+          <h4 className="flter-head">
+            <span>
               Filters
-            </p>
+            </span>
+            <span className="clear" onClick={handleClear}>
+              CLEAR All
+            </span>
+          </h4>
+          <div className="filter-content">
+            <div className="filter-body">
+              <h4>
+                CATEGORY
+              </h4>
+              {category_items.map((data, index) => (
+                <label>
+                  <input type="checkbox" value={data.name} checked={data.applied} onChange={(e) => handleFilter(1, index)} />
+                  <span>
+                    {data.name}
+                  </span>
+                </label>
+              ))}
+            </div>
+            <div className="filter-body">
+              <h4>
+                RATING
+              </h4>
+              {rating_items.map((data, index) => (
+                <label>
+                  <input type="checkbox" value={data.name} checked={data.applied} onChange={(e) => handleFilter(2, index)} />
+                  <span>
+                    {data.name}
+                  </span>
+                </label>
+              ))}
+            </div>
           </div>
         </div>
-        {arr.map((product) => (
-          <Card
-            key={product.id}
-            title={product.title}
-            description={product.description}
-            price={product.price}
-            image={product.image}
-            rating={product.rating}
-            rating_count={product.rating_count}
-            offer={product.offer}
-          />
-        ))}
+        <div className="cards">
+          <div className="text">
+            <p>
+              Showing 1 - {arr.length} of{" "} {arr.length} results
+            </p>
+            <div className="filterImg">
+              <img src={filterImage} alt="filter" />
+              <p onClick={handleModal}>
+                Filters
+              </p>
+            </div>
+          </div>
+          {arr.map((product) => (
+            <Card
+              key={product.id}
+              title={product.title}
+              description={product.description}
+              price={product.price}
+              image={product.image}
+              rating={product.rating}
+              rating_count={product.rating_count}
+              offer={product.offer}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+      <div className="bottomPag">
+        <div className="pageTxtDiv">
+          <span className="pageTxt">
+            Showing 1 - {arr.length} of{" "} {arr.length} results
+          </span>
+        </div>
+        <div>
+          <Pagination />
+        </div>
+        <div className="thirdDiv">
+          <div>
+            <button type="button" className="pgBtnSort" onClick={handleSort}>
+              <span>
+                {sortText}
+              </span>
+              <span className={`caretIconSort ${sort ? 'caretTransform' : ''}`}>
+                <CaretIcon width="16px" height="16px" />
+              </span>
+            </button>
+            {sort &&
+              <ul>
+                <li>
+                  <button type="button" value="Price - Low to High" onClick={handleSortText} >
+                    Price - Low to High
+                  </button>
+                </li>
+                <li>
+                  <button type="button" value="Price - High to Low" onClick={handleSortText}>
+                    Price - High to Low
+                  </button>
+                </li>
+                <li>
+                  <button type="button" value="Top Rated" onClick={handleSortText}>
+                    Top Rated
+                  </button>
+                </li>
+              </ul>
+            }
+          </div>
+          <div>
+            <button type="button" className="pgBtn" onClick={handlePerPage}>
+              <span>
+                {perPageText}
+              </span>
+              <span className={`caretIcon ${perPage ? 'caretTransform' : ''}`}>
+                <CaretIcon width="16px" height="16px" />
+              </span>
+            </button>
+            {perPage &&
+              <ul className="perPageUl">
+                <li>
+                  <button type="button" value="24 per page" onClick={handlePerPageText}>
+                    24 per page
+                  </button>
+                </li>
+                <li>
+                  <button type="button" value="36 per page" onClick={handlePerPageText}>
+                    36 per page
+                  </button>
+                </li>
+                <li>
+                  <button type="button" value="48 per page" onClick={handlePerPageText}>
+                    48 per page
+                  </button>
+                </li>
+              </ul>
+            }
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

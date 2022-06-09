@@ -5,3 +5,17 @@ body {
   padding: 0;
   font-family: Roboto, Arial, sans-serif;
 }
+
+@font-face {
+  font-family: "Effra";
+  src: url('./Effra.woff') format("woff");
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Effra";
+  src: url('./Effra-Bold.woff') format("woff");
+  font-weight: 600;
+  font-display: swap;
+}
