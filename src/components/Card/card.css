@@ -46,6 +46,7 @@
 .product img {
   width: 10rem;
   height: 10rem;
+  margin-left: 5%;
 }
 
 .price>* {
@@ -87,6 +88,10 @@
 
   .price span:first-child {
     font-size: medium !important;
+  }
+
+  .product img {
+    margin-left: 10%;
   }
 }
 
