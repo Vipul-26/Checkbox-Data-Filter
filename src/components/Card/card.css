@@ -68,6 +68,24 @@
   box-shadow: 3px 3px 10px 9px rgb(240, 242, 245);
 }
 
+@media screen and (min-width: 1280px) and (max-width: 1480px) {
+  .price>* {
+    font-size: medium;
+  }
+
+  .offer {
+    font-size: medium;
+  }
+
+  .mrp {
+    font-size: medium;
+  }
+
+  .product {
+    height: 305px;
+  }
+}
+
 @media screen and (min-width: 1024px) and (max-width: 1279px) {
   .product {
     width: 190px;
