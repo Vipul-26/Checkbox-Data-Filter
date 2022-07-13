@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Card from "../Card";
 import "./clothing.css";
 import Data from "../../data.json";
@@ -6,6 +6,7 @@ import filterImage from '../../images/logo/filter.png';
 import Modal from "../Modal";
 import { ReactComponent as CaretIcon } from '../../icons/caret.svg';
 import Pagination from "../Pagination";
+import OutsideClickHandler from 'react-outside-click-handler';
 
 const array = [...Data];
 
@@ -15,11 +16,17 @@ const ClothingAndAccessories = () => {
   let [perPage, setPerPage] = useState(false);
 
   let [sortText, setSortText] = useState("Sort By Price");
-  let [perPageText, setPerPageText] = useState("12 per page");
+  let [perPageValue, setperPageValue] = useState(12);
+  let [arr, setArr] = useState([...array.slice(0, perPageValue)]);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  let [arr, setArr] = useState([...array]);
+  const paginationData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * perPageValue;
+    const lastPageIndex = firstPageIndex + parseInt(perPageValue);
+    setArr(array.slice(firstPageIndex, lastPageIndex));
+  }, [currentPage]);
 
-  const categoryItems = [...new Set(arr.map((data) => data.category)),]
+  const categoryItems = [...new Set(array.map((data) => data && data.category)),]
     .map((category) => {
       return { name: category, applied: false };
     });
@@ -33,6 +40,8 @@ const ClothingAndAccessories = () => {
   let [rating_items, setRatingsItems] = useState([...ratingItems]);
 
   const [isOpen, toggleModal] = useState(false);
+  const [isCategory, setCategory] = useState(false);
+  const [isRating, setRating] = useState(false);
 
   const handleModal = () => {
     toggleModal(true);
@@ -40,7 +49,7 @@ const ClothingAndAccessories = () => {
 
   function myFun() {
     toggleModal(false);
-  }
+  };
 
   const handleApply = () => {
     const myTimeout = setTimeout(myFun, 500);
@@ -53,16 +62,18 @@ const ClothingAndAccessories = () => {
     const rating = rating_items;
     rating.forEach((item) => (item.applied = false));
     setRatingsItems(rating);
-    setArr(array);
+    setArr([...array.slice(0, perPageValue)])
   };
 
   const handleFilter = (id, index) => {
-    if (id == 1) {
+    if (id === 1) {
+      setCategory(true);
       const category = category_items;
       category[index].applied = !category[index].applied;
       setCategoryItems(category);
     }
-    else if (id == 2) {
+    else if (id === 2) {
+      setRating(true);
       const rating = rating_items;
       rating[index].applied = !rating[index].applied;
       setRatingsItems(rating);
@@ -88,13 +99,13 @@ const ClothingAndAccessories = () => {
       const filteredProducts = array.filter(
         (product) => categories.includes(product.category) && product.rating >= minRating
       );
-      setArr(filteredProducts);
+      setArr([...filteredProducts.slice(0, perPageValue)])
     }
     else {
       const filteredProducts = array.filter(
         (product) => product.rating >= minRating
       );
-      setArr(filteredProducts);
+      setArr([...filteredProducts.slice(0, perPageValue)])
     }
   };
 
@@ -111,11 +122,115 @@ const ClothingAndAccessories = () => {
   const handleSortText = (e) => {
     setSortText(e.target.value);
     setSort(false);
+    if (isCategory || isRating) {
+      const filteredCategories = category_items.filter(
+        (item) => item.applied === true
+      );
+
+      const filteredRatings = rating_items.filter(
+        (item) => item.applied === true
+      );
+
+      if (e.target.value === 'Price - Low to High') {
+        setArr(array.sort((a, b) => a.price - b.price));
+      }
+      else if (e.target.value === 'Price - High to Low') {
+        setArr(array.sort((a, b) => b.price - a.price));
+      }
+      else if (e.target.value === 'Top Rated') {
+        alert("Hi, it will come soon");
+      }
+
+      let minRating = 0;
+      if (filteredRatings.length) {
+        minRating = Math.min(
+          ...filteredRatings.map((item) => item.name.split("★")[0])
+        );
+      }
+
+      if (filteredCategories.length) {
+        const categories = filteredCategories.map((item) => item.name);
+        const filteredProducts = array.filter(
+          (product) => categories.includes(product.category) && product.rating >= minRating
+        );
+        setArr([...filteredProducts.slice(0, perPageValue)])
+      }
+      else {
+        const filteredProducts = array.filter(
+          (product) => product.rating >= minRating
+        );
+        setArr([...filteredProducts.slice(0, perPageValue)])
+      }
+    }
+    else {
+      if (sortText === 'Price - Low to High') {
+        setArr(array.sort((a, b) => a.price - b.price));
+      }
+      else if (sortText === 'Price - High to Low') {
+        setArr(array.sort((a, b) => b.price - a.price));
+      }
+      else if (sortText === 'Top Rated') {
+        alert("Hi, it will come soon");
+      }
+      setArr([...array.slice(0, perPageValue)]);
+    }
   };
 
-  const handlePerPageText = (e) => {
-    setPerPageText(e.target.value);
+  const handlePerPageValue = (e) => {
+    setperPageValue(e.target.value);
     setPerPage(false);
+    if (isCategory || isRating) {
+      const filteredCategories = category_items.filter(
+        (item) => item.applied === true
+      );
+
+      const filteredRatings = rating_items.filter(
+        (item) => item.applied === true
+      );
+
+      if (sortText === 'Price - Low to High') {
+        setArr(array.sort((a, b) => a.price - b.price));
+      }
+      else if (sortText === 'Price - High to Low') {
+        setArr(array.sort((a, b) => b.price - a.price));
+      }
+      else if (sortText === 'Top Rated') {
+        alert("Hi, it will come soon");
+      }
+
+      let minRating = 0;
+      if (filteredRatings.length) {
+        minRating = Math.min(
+          ...filteredRatings.map((item) => item.name.split("★")[0])
+        );
+      }
+
+      if (filteredCategories.length) {
+        const categories = filteredCategories.map((item) => item.name);
+        const filteredProducts = array.filter(
+          (product) => categories.includes(product.category) && product.rating >= minRating
+        );
+        setArr([...filteredProducts.slice(0, e.target.value)])
+      }
+      else {
+        const filteredProducts = array.filter(
+          (product) => product.rating >= minRating
+        );
+        setArr([...filteredProducts.slice(0, e.target.value)])
+      }
+    }
+    else {
+      if (sortText === 'Price - Low to High') {
+        setArr(array.sort((a, b) => a.price - b.price));
+      }
+      else if (sortText === 'Price - High to Low') {
+        setArr(array.sort((a, b) => b.price - a.price));
+      }
+      else if (sortText === 'Top Rated') {
+        alert("Hi, it will come soon");
+      }
+      setArr([...array.slice(0, e.target.value)]);
+    }
   };
 
   return (
@@ -243,7 +358,7 @@ const ClothingAndAccessories = () => {
           </span>
         </div>
         <div>
-          <Pagination />
+          <Pagination currentPage={currentPage} totalCount={eval(array.length / (perPageValue / 12))} onPageChange={page => setCurrentPage(page)} />
         </div>
         <div className="thirdDiv">
           <div>
@@ -256,52 +371,60 @@ const ClothingAndAccessories = () => {
               </span>
             </button>
             {sort &&
-              <ul>
-                <li>
-                  <button type="button" value="Price - Low to High" onClick={handleSortText} >
-                    Price - Low to High
-                  </button>
-                </li>
-                <li>
-                  <button type="button" value="Price - High to Low" onClick={handleSortText}>
-                    Price - High to Low
-                  </button>
-                </li>
-                <li>
-                  <button type="button" value="Top Rated" onClick={handleSortText}>
-                    Top Rated
-                  </button>
-                </li>
-              </ul>
+              <OutsideClickHandler
+                onOutsideClick={() => { setSort(false); }}
+              >
+                <ul>
+                  <li>
+                    <button type="button" value="Price - Low to High" onClick={handleSortText} >
+                      Price - Low to High
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" value="Price - High to Low" onClick={handleSortText}>
+                      Price - High to Low
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" value="Top Rated" onClick={handleSortText}>
+                      Top Rated
+                    </button>
+                  </li>
+                </ul>
+              </OutsideClickHandler>
             }
           </div>
           <div>
             <button type="button" className="pgBtn" onClick={handlePerPage}>
               <span>
-                {perPageText}
+                {`${perPageValue} per page`}
               </span>
               <span className={`caretIcon ${perPage ? 'caretTransform' : ''}`}>
                 <CaretIcon width="16px" height="16px" />
               </span>
             </button>
             {perPage &&
-              <ul className="perPageUl">
-                <li>
-                  <button type="button" value="24 per page" onClick={handlePerPageText}>
-                    24 per page
-                  </button>
-                </li>
-                <li>
-                  <button type="button" value="36 per page" onClick={handlePerPageText}>
-                    36 per page
-                  </button>
-                </li>
-                <li>
-                  <button type="button" value="48 per page" onClick={handlePerPageText}>
-                    48 per page
-                  </button>
-                </li>
-              </ul>
+              <OutsideClickHandler
+                onOutsideClick={() => { setPerPage(false); }}
+              >
+                <ul className="perPageUl">
+                  <li>
+                    <button type="button" value="12" onClick={handlePerPageValue}>
+                      12 per page
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" value="24" onClick={handlePerPageValue}>
+                      24 per page
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" value="36" onClick={handlePerPageValue}>
+                      36 per page
+                    </button>
+                  </li>
+                </ul>
+              </OutsideClickHandler>
             }
           </div>
         </div>

@@ -2,13 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './pagination.css';
 import { ReactComponent as ButtonArrow } from '../../icons/arrow.svg';
 
-const Pagination = () => {
+const Pagination = ({ currentPage, totalCount, onPageChange }) => {
 
-    const totalRecords = 80;
-    // const router = useRouter();
+    const totalRecords = totalCount;
     const [totalPages, setTotalPages] = useState(0);
-    // const currentPageNo = parseInt(router?.query?.detail?.[2]) || 1;
-    const currentPageNo = 1;
     const [width, setWidth] = useState(window.innerWidth);
 
     useEffect(() => {
@@ -29,7 +26,7 @@ const Pagination = () => {
         const paginationArray = [];
         let countOfDotItems = 0;
         if (!totalPages && 1 >= totalPages) {
-            return paginationArray.push(currentPageNo);
+            return paginationArray.push(currentPage);
         }
         if (0 < currentPage - 2) {
             paginationArray.push(currentPage - 2);
@@ -60,36 +57,44 @@ const Pagination = () => {
         return paginationArray;
     };
 
-    const rangeData = totalPages ? createPaginationLinks(currentPageNo, totalPages) : [];
-    const prevDisabled = currentPageNo === 1 ? 'disabled' : '';
-    const nextDisabled = currentPageNo === totalPages ? 'disabled' : '';
+    const onNext = () => {
+        onPageChange(currentPage + 1);
+    };
+
+    const onPrevious = () => {
+        onPageChange(currentPage - 1);
+    };
+
+    const rangeData = totalPages ? createPaginationLinks(currentPage, totalPages) : [];
+    const prevDisabled = currentPage === 1 ? 'disabled' : '';
+    const nextDisabled = currentPage === totalPages ? 'disabled' : '';
 
     return (
         <div>
             {width < 1279 ?
                 <div className='mobPaginationMainDiv'>
-                    <a href='/' className={`paginationPrevNext ${prevDisabled}`}>
+                    <a href="javascript:void(0)" className={`paginationPrevNext ${prevDisabled}`} onClick={onPrevious}>
                         <ButtonArrow height='17px' width='17px' className='prevArrow' />
                         Back
                     </a>
                     <div className='mobPagination'>
-                        <div>{`${currentPageNo}/${totalPages}`}</div>
+                        <div>{`${currentPage}/${totalPages}`}</div>
                     </div>
-                    <a href='/' className={`paginationPrevNext ${nextDisabled}`}>
+                    <a href="javascript:void(0)" className={`paginationPrevNext ${nextDisabled}`} onClick={onNext}>
                         Next
                         <ButtonArrow height='17px' width='17px' className='nextArrow' />
                     </a>
                 </div>
                 :
                 <div className='dskPagination'>
-                    <a href='/' className='paginationPrevNext prevDisabled'>
+                    <a href="javascript:void(0)" className={`paginationPrevNext ${prevDisabled}`} onClick={onPrevious}>
                         <ButtonArrow height='17px' width='17px' className='prevArrow' />
                         Back
                     </a>
                     {rangeData?.map(index => {
-                        const activeClass = currentPageNo === index ? 'currentPage' : 'normalPage';
+                        const activeClass = currentPage === index ? 'currentPage' : 'normalPage';
                         return typeof index === 'number' ? (
-                            <a href='/' className={`${activeClass}`}>
+                            <a href="javascript:void(0)" className={`${activeClass}`} onClick={() => onPageChange(index)}>
                                 {index}
                             </a>
                         ) : (
@@ -98,7 +103,7 @@ const Pagination = () => {
                             </span>
                         );
                     })}
-                    <a href='/' className='paginationPrevNext nextDisabled'>
+                    <a href="javascript:void(0)" className={`paginationPrevNext ${nextDisabled}`} onClick={onNext}>
                         Next
                         <ButtonArrow height='17px' width='17px' className='nextArrow' />
                     </a>
