@@ -163,13 +163,13 @@ const ClothingAndAccessories = () => {
       }
     }
     else {
-      if (sortText === 'Price - Low to High') {
+      if (e.target.value === 'Price - Low to High') {
         setArr(array.sort((a, b) => a.price - b.price));
       }
-      else if (sortText === 'Price - High to Low') {
+      else if (e.target.value === 'Price - High to Low') {
         setArr(array.sort((a, b) => b.price - a.price));
       }
-      else if (sortText === 'Top Rated') {
+      else if (e.target.value === 'Top Rated') {
         alert("Hi, it will come soon");
       }
       setArr([...array.slice(0, perPageValue)]);
