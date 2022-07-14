@@ -37,9 +37,14 @@ const ClothingAndAccessories = () => {
 
   const [fillProd, setFillProd] = useState(array.length);
 
+  let [firstPage, setFirstPage] = useState(1);
+  let [lastPage, setLastPage] = useState(12);
+
   useMemo(() => {
     const firstPageIndex = (currentPage - 1) * perPageValue;
+    setFirstPage(firstPageIndex + 1);
     const lastPageIndex = firstPageIndex + parseInt(perPageValue);
+    setLastPage(lastPageIndex);
     if (isCategory || isRating) {
       const filteredCategories = category_items.filter(
         (item) => item.applied === true
@@ -352,7 +357,7 @@ const ClothingAndAccessories = () => {
         <div className="cards">
           <div className="text">
             <p>
-              Showing 1 - {arr.length} of{" "} {fillProd} results
+              Showing {firstPage} - {fillProd > lastPage ? lastPage : fillProd} of{" "} {fillProd} results
             </p>
             <div className="filterImg">
               <img src={filterImage} alt="filter" />
@@ -378,7 +383,7 @@ const ClothingAndAccessories = () => {
       <div className="bottomPag">
         <div className="pageTxtDiv">
           <span className="pageTxt">
-            Showing 1 - {arr.length} of{" "} {fillProd} results
+            Showing {firstPage} - {fillProd > lastPage ? lastPage : fillProd} of{" "} {fillProd} results
           </span>
         </div>
         <div>
