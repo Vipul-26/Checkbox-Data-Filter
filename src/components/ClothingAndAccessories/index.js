@@ -19,12 +19,8 @@ const ClothingAndAccessories = () => {
   let [perPageValue, setperPageValue] = useState(12);
   let [arr, setArr] = useState([...array.slice(0, perPageValue)]);
   const [currentPage, setCurrentPage] = useState(1);
-
-  const paginationData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * perPageValue;
-    const lastPageIndex = firstPageIndex + parseInt(perPageValue);
-    setArr(array.slice(firstPageIndex, lastPageIndex));
-  }, [currentPage]);
+  const [isCategory, setCategory] = useState(false);
+  const [isRating, setRating] = useState(false);
 
   const categoryItems = [...new Set(array.map((data) => data && data.category)),]
     .map((category) => {
@@ -39,9 +35,47 @@ const ClothingAndAccessories = () => {
 
   let [rating_items, setRatingsItems] = useState([...ratingItems]);
 
+  const [fillProd, setFillProd] = useState(array.length);
+
+  useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * perPageValue;
+    const lastPageIndex = firstPageIndex + parseInt(perPageValue);
+    if (isCategory || isRating) {
+      const filteredCategories = category_items.filter(
+        (item) => item.applied === true
+      );
+
+      const filteredRatings = rating_items.filter(
+        (item) => item.applied === true
+      );
+
+      let minRating = 0;
+      if (filteredRatings.length) {
+        minRating = Math.min(
+          ...filteredRatings.map((item) => item.name.split("★")[0])
+        );
+      }
+
+      if (filteredCategories.length) {
+        const categories = filteredCategories.map((item) => item.name);
+        const filteredProducts = array.filter(
+          (product) => categories.includes(product.category) && product.rating >= minRating
+        );
+        setArr([...filteredProducts.slice(firstPageIndex, lastPageIndex)])
+      }
+      else {
+        const filteredProducts = array.filter(
+          (product) => product.rating >= minRating
+        );
+        setArr([...filteredProducts.slice(firstPageIndex, lastPageIndex)])
+      }
+    }
+    else {
+      setArr(array.slice(firstPageIndex, lastPageIndex));
+    }
+  }, [currentPage]);
+
   const [isOpen, toggleModal] = useState(false);
-  const [isCategory, setCategory] = useState(false);
-  const [isRating, setRating] = useState(false);
 
   const handleModal = () => {
     toggleModal(true);
@@ -99,12 +133,14 @@ const ClothingAndAccessories = () => {
       const filteredProducts = array.filter(
         (product) => categories.includes(product.category) && product.rating >= minRating
       );
+      setFillProd(filteredProducts.length);
       setArr([...filteredProducts.slice(0, perPageValue)])
     }
     else {
       const filteredProducts = array.filter(
         (product) => product.rating >= minRating
       );
+      setFillProd(filteredProducts.length);
       setArr([...filteredProducts.slice(0, perPageValue)])
     }
   };
@@ -137,9 +173,6 @@ const ClothingAndAccessories = () => {
       else if (e.target.value === 'Price - High to Low') {
         setArr(array.sort((a, b) => b.price - a.price));
       }
-      else if (e.target.value === 'Top Rated') {
-        alert("Hi, it will come soon");
-      }
 
       let minRating = 0;
       if (filteredRatings.length) {
@@ -169,9 +202,6 @@ const ClothingAndAccessories = () => {
       else if (e.target.value === 'Price - High to Low') {
         setArr(array.sort((a, b) => b.price - a.price));
       }
-      else if (e.target.value === 'Top Rated') {
-        alert("Hi, it will come soon");
-      }
       setArr([...array.slice(0, perPageValue)]);
     }
   };
@@ -193,9 +223,6 @@ const ClothingAndAccessories = () => {
       }
       else if (sortText === 'Price - High to Low') {
         setArr(array.sort((a, b) => b.price - a.price));
-      }
-      else if (sortText === 'Top Rated') {
-        alert("Hi, it will come soon");
       }
 
       let minRating = 0;
@@ -225,9 +252,6 @@ const ClothingAndAccessories = () => {
       }
       else if (sortText === 'Price - High to Low') {
         setArr(array.sort((a, b) => b.price - a.price));
-      }
-      else if (sortText === 'Top Rated') {
-        alert("Hi, it will come soon");
       }
       setArr([...array.slice(0, e.target.value)]);
     }
@@ -328,7 +352,7 @@ const ClothingAndAccessories = () => {
         <div className="cards">
           <div className="text">
             <p>
-              Showing 1 - {arr.length} of{" "} {arr.length} results
+              Showing 1 - {arr.length} of{" "} {fillProd} results
             </p>
             <div className="filterImg">
               <img src={filterImage} alt="filter" />
@@ -354,11 +378,11 @@ const ClothingAndAccessories = () => {
       <div className="bottomPag">
         <div className="pageTxtDiv">
           <span className="pageTxt">
-            Showing 1 - {arr.length} of{" "} {arr.length} results
+            Showing 1 - {arr.length} of{" "} {fillProd} results
           </span>
         </div>
         <div>
-          <Pagination currentPage={currentPage} totalCount={eval(array.length / (perPageValue / 12))} onPageChange={page => setCurrentPage(page)} />
+          <Pagination currentPage={currentPage} totalCount={(isCategory || isRating) ? eval(fillProd / (perPageValue / 12)) : eval(array.length / (perPageValue / 12))} onPageChange={page => setCurrentPage(page)} />
         </div>
         <div className="thirdDiv">
           <div>
@@ -383,11 +407,6 @@ const ClothingAndAccessories = () => {
                   <li>
                     <button type="button" value="Price - High to Low" onClick={handleSortText}>
                       Price - High to Low
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" value="Top Rated" onClick={handleSortText}>
-                      Top Rated
                     </button>
                   </li>
                 </ul>
@@ -416,11 +435,6 @@ const ClothingAndAccessories = () => {
                   <li>
                     <button type="button" value="24" onClick={handlePerPageValue}>
                       24 per page
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" value="36" onClick={handlePerPageValue}>
-                      36 per page
                     </button>
                   </li>
                 </ul>
