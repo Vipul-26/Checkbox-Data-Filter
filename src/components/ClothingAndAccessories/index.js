@@ -262,6 +262,17 @@ const ClothingAndAccessories = () => {
     }
   };
 
+  const [showCategory, setShowCategory] = useState(true);
+  const [showRating, setShowRating] = useState(true);
+
+  const handleCategory = () => {
+    setShowCategory(!showCategory);
+  };
+
+  const handleRating = () => {
+    setShowRating(!showRating);
+  };
+
   return (
     <>
       <div className="content">
@@ -327,10 +338,10 @@ const ClothingAndAccessories = () => {
           </h4>
           <div className="filter-content">
             <div className="filter-body">
-              <h4>
+              <h4 className={showCategory ? 'categoryH4minus' : 'categoryH4plus'} onClick={handleCategory}>
                 CATEGORY
               </h4>
-              {category_items.map((data, index) => (
+              {showCategory && category_items.map((data, index) => (
                 <label>
                   <input type="checkbox" value={data.name} checked={data.applied} onChange={(e) => handleFilter(1, index)} />
                   <span>
@@ -340,10 +351,10 @@ const ClothingAndAccessories = () => {
               ))}
             </div>
             <div className="filter-body">
-              <h4>
-                RATING
+              <h4 className={showRating ? 'ratingH4minus' : 'ratingH4plus'} onClick={handleRating}>
+                RATINGS
               </h4>
-              {rating_items.map((data, index) => (
+              {showRating && rating_items.map((data, index) => (
                 <label>
                   <input type="checkbox" value={data.name} checked={data.applied} onChange={(e) => handleFilter(2, index)} />
                   <span>

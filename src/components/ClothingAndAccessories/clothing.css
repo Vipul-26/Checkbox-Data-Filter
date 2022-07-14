@@ -8,6 +8,7 @@
   border-right: 10px solid #efedf2;
   padding: 10px;
   font-size: 16px;
+  padding-left: 1rem;
 }
 
 .cards {
@@ -29,12 +30,66 @@
 
 .flter-head {
   border-bottom: 3px solid rgb(240, 242, 245);
-  padding-bottom: 2px;
+  padding-bottom: 16px;
+  margin-block-start: 0.4rem;
+  margin-block-end: 0.5rem;
 }
 
 .filter-body {
   display: flex;
   flex-direction: column;
+  border-bottom: 2px solid #d2d2d2;
+}
+
+.filter-body label {
+  padding-left: 0.5rem;
+  width: fit-content;
+}
+
+.filter-body label:nth-child(5) {
+  padding-bottom: 0.6rem;
+}
+
+.filter-body h4 {
+  margin-block-start: 1rem;
+  margin-block-end: 1rem;
+  position: relative;
+}
+
+.categoryH4plus:after {
+  content: "＋";
+  position: absolute;
+  right: 0;
+  color: #888;
+}
+
+.ratingH4minus:after {
+  background: #888;
+  content: "";
+  height: 2px;
+  margin-top: 0.5rem;
+  right: 0.5rem;
+  width: 12px;
+  position: absolute;
+  color: #888;
+}
+
+.categoryH4minus:after {
+  background: #888;
+  content: "";
+  margin-top: 0.5rem;
+  height: 2px;
+  right: 0.5rem;
+  width: 12px;
+  position: absolute;
+  color: #888;
+}
+
+.ratingH4plus:after {
+  content: "＋";
+  position: absolute;
+  right: 0;
+  color: #888;
 }
 
 input[type="checkbox"] {
@@ -95,6 +150,10 @@ input[type="checkbox"]:hover {
   width: 100%;
   cursor: pointer;
   min-width: 180px;
+}
+
+.pgBtn:hover, .pgBtnSort:hover {
+  border: 2px solid #1377c9;
 }
 
 .caretIcon {
