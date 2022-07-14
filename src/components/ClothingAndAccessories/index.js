@@ -386,18 +386,18 @@ const ClothingAndAccessories = () => {
         </div>
         <div className="thirdDiv">
           <div>
-            <button type="button" className="pgBtnSort" onClick={handleSort}>
-              <span>
-                {sortText}
-              </span>
-              <span className={`caretIconSort ${sort ? 'caretTransform' : ''}`}>
-                <CaretIcon width="16px" height="16px" />
-              </span>
-            </button>
-            {sort &&
-              <OutsideClickHandler
-                onOutsideClick={() => { setSort(false); }}
-              >
+            <OutsideClickHandler
+              onOutsideClick={() => { setSort(false); }}
+            >
+              <button type="button" className="pgBtnSort" onClick={handleSort}>
+                <span>
+                  {sortText}
+                </span>
+                <span className={`caretIconSort ${sort ? 'caretTransform' : ''}`}>
+                  <CaretIcon width="16px" height="16px" />
+                </span>
+              </button>
+              {sort &&
                 <ul>
                   <li>
                     <button type="button" value="Price - Low to High" onClick={handleSortText} >
@@ -410,22 +410,22 @@ const ClothingAndAccessories = () => {
                     </button>
                   </li>
                 </ul>
-              </OutsideClickHandler>
-            }
+              }
+            </OutsideClickHandler>
           </div>
           <div>
-            <button type="button" className="pgBtn" onClick={handlePerPage}>
-              <span>
-                {`${perPageValue} per page`}
-              </span>
-              <span className={`caretIcon ${perPage ? 'caretTransform' : ''}`}>
-                <CaretIcon width="16px" height="16px" />
-              </span>
-            </button>
-            {perPage &&
-              <OutsideClickHandler
-                onOutsideClick={() => { setPerPage(false); }}
-              >
+            <OutsideClickHandler
+              onOutsideClick={() => { setPerPage(false); }}
+            >
+              <button type="button" className="pgBtn" onClick={handlePerPage}>
+                <span>
+                  {`${perPageValue} per page`}
+                </span>
+                <span className={`caretIcon ${perPage ? 'caretTransform' : ''}`}>
+                  <CaretIcon width="16px" height="16px" />
+                </span>
+              </button>
+              {perPage &&
                 <ul className="perPageUl">
                   <li>
                     <button type="button" value="12" onClick={handlePerPageValue}>
@@ -438,8 +438,8 @@ const ClothingAndAccessories = () => {
                     </button>
                   </li>
                 </ul>
-              </OutsideClickHandler>
-            }
+              }
+            </OutsideClickHandler>
           </div>
         </div>
       </div>

@@ -151,6 +151,11 @@ input[type="checkbox"]:hover {
   min-width: 170px;
 }
 
+.thirdDiv .perPageUl {
+  min-width: auto;
+  max-width: 137px;
+}
+
 .thirdDiv ul li {
   padding: 10px 0.5rem;
   border-bottom: 1px solid #f2f2f2;
