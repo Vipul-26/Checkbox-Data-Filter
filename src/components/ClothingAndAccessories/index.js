@@ -64,13 +64,13 @@ const ClothingAndAccessories = () => {
       if (filteredCategories.length) {
         const categories = filteredCategories.map((item) => item.name);
         const filteredProducts = array.filter(
-          (product) => categories.includes(product.category) && product.rating >= minRating
+          (product) => categories.includes(product.category) && product.rating >= minRating && product.rating < minRating + 1
         );
         setArr([...filteredProducts.slice(firstPageIndex, lastPageIndex)])
       }
       else {
         const filteredProducts = array.filter(
-          (product) => product.rating >= minRating
+          (product) => product.rating >= minRating && product.rating < minRating + 1
         );
         setArr([...filteredProducts.slice(firstPageIndex, lastPageIndex)])
       }
@@ -111,6 +111,7 @@ const ClothingAndAccessories = () => {
       category[index].applied = !category[index].applied;
       setCategoryItems(category);
     }
+
     else if (id === 2) {
       setRating(true);
       const rating = rating_items;
@@ -136,14 +137,14 @@ const ClothingAndAccessories = () => {
     if (filteredCategories.length) {
       const categories = filteredCategories.map((item) => item.name);
       const filteredProducts = array.filter(
-        (product) => categories.includes(product.category) && product.rating >= minRating
+        (product) => categories.includes(product.category) && product.rating >= minRating && product.rating < minRating + 1
       );
       setFillProd(filteredProducts.length);
       setArr([...filteredProducts.slice(0, perPageValue)])
     }
     else {
       const filteredProducts = array.filter(
-        (product) => product.rating >= minRating
+        (product) => product.rating >= minRating && product.rating < minRating + 1
       );
       setFillProd(filteredProducts.length);
       setArr([...filteredProducts.slice(0, perPageValue)])
@@ -189,13 +190,13 @@ const ClothingAndAccessories = () => {
       if (filteredCategories.length) {
         const categories = filteredCategories.map((item) => item.name);
         const filteredProducts = array.filter(
-          (product) => categories.includes(product.category) && product.rating >= minRating
+          (product) => categories.includes(product.category) && product.rating >= minRating && product.rating < minRating + 1
         );
         setArr([...filteredProducts.slice(0, perPageValue)])
       }
       else {
         const filteredProducts = array.filter(
-          (product) => product.rating >= minRating
+          (product) => product.rating >= minRating && product.rating < minRating + 1
         );
         setArr([...filteredProducts.slice(0, perPageValue)])
       }
@@ -240,13 +241,13 @@ const ClothingAndAccessories = () => {
       if (filteredCategories.length) {
         const categories = filteredCategories.map((item) => item.name);
         const filteredProducts = array.filter(
-          (product) => categories.includes(product.category) && product.rating >= minRating
+          (product) => categories.includes(product.category) && product.rating >= minRating && product.rating < minRating + 1
         );
         setArr([...filteredProducts.slice(0, e.target.value)])
       }
       else {
         const filteredProducts = array.filter(
-          (product) => product.rating >= minRating
+          (product) => product.rating >= minRating && product.rating < minRating + 1
         );
         setArr([...filteredProducts.slice(0, e.target.value)])
       }

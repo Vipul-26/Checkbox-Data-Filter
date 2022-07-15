@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './header.css';
 import flipkartLogo from '../../images/logo/flipkart.png';
 import goldenStar from '../../images/logo/golden-star.png';
@@ -6,9 +6,29 @@ import { IoIosCart, IoIosSearch, IoIosArrowDown } from 'react-icons/io';
 
 const Header = () => {
 
+  useEffect(() => {
+    const header = document.getElementById("header");
+    const mobHeader = document.getElementById("mobHeader");
+    const sticky = header.offsetTop;
+    const mobSticky = mobHeader.offsetTop;
+    const onScroll = () => {
+      if (window.pageYOffset > sticky || window.pageXOffset > mobSticky) {
+        header.classList.add("sticky");
+        mobHeader.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+        mobHeader.classList.add("sticky");
+      }
+    }
+    window.addEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    }
+  }, []);
+
   return (
     <>
-      <div className="header">
+      <div className="header" id="header">
         <div className="logo">
           <a>
             <img src={flipkartLogo} className="logoimage" alt="flipkart" />
@@ -56,7 +76,7 @@ const Header = () => {
           </a>
         </div>
       </div>
-      <div className="mobHeader">
+      <div className="mobHeader" id="mobHeader">
         <div className='subDiv'>
           <div className="logo">
             <a>

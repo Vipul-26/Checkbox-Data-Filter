@@ -321,6 +321,7 @@ input[type="checkbox"]:hover {
   .cards {
     width: 100%;
     justify-content: center;
+    margin-top: 6.5rem;
   }
 
   .text {

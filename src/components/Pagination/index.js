@@ -59,10 +59,12 @@ const Pagination = ({ currentPage, totalCount, onPageChange }) => {
 
     const onNext = () => {
         onPageChange(currentPage + 1);
+        document.documentElement.scrollTop = 0;
     };
 
     const onPrevious = () => {
         onPageChange(currentPage - 1);
+        document.documentElement.scrollTop = 0;
     };
 
     const rangeData = totalPages ? createPaginationLinks(currentPage, totalPages) : [];
@@ -78,7 +80,9 @@ const Pagination = ({ currentPage, totalCount, onPageChange }) => {
                         Back
                     </a>
                     <div className='mobPagination'>
-                        <div>{`${currentPage}/${totalPages}`}</div>
+                        <div>
+                            {`${currentPage}/${totalPages}`}
+                        </div>
                     </div>
                     <a href="javascript:void(0)" className={`paginationPrevNext ${nextDisabled}`} onClick={onNext}>
                         Next
@@ -94,7 +98,7 @@ const Pagination = ({ currentPage, totalCount, onPageChange }) => {
                     {rangeData?.map(index => {
                         const activeClass = currentPage === index ? 'currentPage' : 'normalPage';
                         return typeof index === 'number' ? (
-                            <a href="javascript:void(0)" className={`${activeClass}`} onClick={() => onPageChange(index)}>
+                            <a href="javascript:void(0)" className={`${activeClass}`} onClick={() => { onPageChange(index); document.documentElement.scrollTop = 0; }}>
                                 {index}
                             </a>
                         ) : (
