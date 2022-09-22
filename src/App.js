@@ -4,7 +4,7 @@ import ClothingAndAccessories from './components/ClothingAndAccessories';
 import Footer from './components/Footer/index';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
     <div>
       <Header />
@@ -12,6 +12,6 @@ function App() {
       <Footer />
     </div>
   );
-}
+};
 
 export default App;

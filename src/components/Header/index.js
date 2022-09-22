@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './header.css';
 import flipkartLogo from '../../images/logo/flipkart.png';
 import goldenStar from '../../images/logo/golden-star.png';
@@ -30,7 +30,7 @@ const Header = () => {
     <>
       <div className="header" id="header">
         <div className="logo">
-          <a>
+          <a href="/">
             <img src={flipkartLogo} className="logoimage" alt="flipkart" />
           </a>
           <a href="/" className="underline">
@@ -55,12 +55,12 @@ const Header = () => {
           </div>
         </div>
         <div className="login">
-          <a className="loginButton">
+          <a href="/" className="loginButton">
             Login
           </a>
         </div>
         <div className='moreContainer'>
-          <a className="more">
+          <a href="/" className="more">
             <span>
               More
             </span>
@@ -68,7 +68,7 @@ const Header = () => {
           </a>
         </div>
         <div className='cartContainer'>
-          <a className="cart">
+          <a href="/" className="cart">
             <IoIosCart style={{ fontSize: '18px', strokeWidth: '25px' }} />
             <span style={{ margin: '2px 6px 0px 6px' }}>
               Cart
@@ -79,7 +79,7 @@ const Header = () => {
       <div className="mobHeader" id="mobHeader">
         <div className='subDiv'>
           <div className="logo">
-            <a>
+            <a href="/">
               <img src={flipkartLogo} className="logoimage" alt="flipkart" />
             </a>
             <a href="/" className="underline">
@@ -94,12 +94,12 @@ const Header = () => {
           </div>
           <div className='subDivTwo'>
             <div className='cartContainer'>
-              <a className="cart">
+              <a href="/" className="cart">
                 <IoIosCart style={{ fontSize: '18px', strokeWidth: '25px' }} />
               </a>
             </div>
             <div className="login">
-              <a className="loginButton">
+              <a href="/" className="loginButton">
                 Login
               </a>
             </div>

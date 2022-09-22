@@ -6,7 +6,7 @@ const Modal = ({ isOpen, onCloseModal, handleClear, children }) => isOpen && (
     <div className="modalWrapper">
         <div className="mainModal">
             <section className="modalBox">
-                <a href="#" onClick={(event) => { event.preventDefault(); onCloseModal(!isOpen); handleClear(); }}>
+                <a href="#!" onClick={(event) => { event.preventDefault(); onCloseModal(!isOpen); handleClear(); }}>
                     <CloseIcon className="closeIcon" />
                 </a>
                 <div className="modalContent">{children}</div>

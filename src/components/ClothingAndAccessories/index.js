@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import Card from "../Card";
 import "./clothing.css";
 import Data from "../../data.json";
@@ -64,13 +64,13 @@ const ClothingAndAccessories = () => {
       if (filteredCategories.length) {
         const categories = filteredCategories.map((item) => item.name);
         const filteredProducts = array.filter(
-          (product) => categories.includes(product.category) && product.rating >= minRating && product.rating < minRating + 1
+          (product) => categories.includes(product.category) && product.rating >= minRating
         );
         setArr([...filteredProducts.slice(firstPageIndex, lastPageIndex)])
       }
       else {
         const filteredProducts = array.filter(
-          (product) => product.rating >= minRating && product.rating < minRating + 1
+          (product) => product.rating >= minRating
         );
         setArr([...filteredProducts.slice(firstPageIndex, lastPageIndex)])
       }
@@ -78,7 +78,7 @@ const ClothingAndAccessories = () => {
     else {
       setArr(array.slice(firstPageIndex, lastPageIndex));
     }
-  }, [currentPage]);
+  }, [currentPage, category_items, isCategory, isRating, perPageValue, rating_items]);
 
   const [isOpen, toggleModal] = useState(false);
 
@@ -86,25 +86,27 @@ const ClothingAndAccessories = () => {
     toggleModal(true);
   };
 
-  function myFun() {
+  const myFun = () => {
     toggleModal(false);
   };
 
   const handleApply = () => {
-    const myTimeout = setTimeout(myFun, 500);
+    setTimeout(myFun, 500);
   };
 
   const handleClear = () => {
+    setCurrentPage(1);
     const category = category_items;
     category.forEach((item) => (item.applied = false));
     setCategoryItems(category);
     const rating = rating_items;
     rating.forEach((item) => (item.applied = false));
     setRatingsItems(rating);
-    setArr([...array.slice(0, perPageValue)])
+    setArr([...array.slice(0, perPageValue)]);
   };
 
   const handleFilter = (id, index) => {
+    setCurrentPage(1);
     if (id === 1) {
       setCategory(true);
       const category = category_items;
@@ -137,14 +139,14 @@ const ClothingAndAccessories = () => {
     if (filteredCategories.length) {
       const categories = filteredCategories.map((item) => item.name);
       const filteredProducts = array.filter(
-        (product) => categories.includes(product.category) && product.rating >= minRating && product.rating < minRating + 1
+        (product) => categories.includes(product.category) && product.rating >= minRating
       );
       setFillProd(filteredProducts.length);
       setArr([...filteredProducts.slice(0, perPageValue)])
     }
     else {
       const filteredProducts = array.filter(
-        (product) => product.rating >= minRating && product.rating < minRating + 1
+        (product) => product.rating >= minRating
       );
       setFillProd(filteredProducts.length);
       setArr([...filteredProducts.slice(0, perPageValue)])
@@ -162,6 +164,7 @@ const ClothingAndAccessories = () => {
   };
 
   const handleSortText = (e) => {
+    setCurrentPage(1);
     setSortText(e.target.value);
     setSort(false);
     if (isCategory || isRating) {
@@ -190,13 +193,13 @@ const ClothingAndAccessories = () => {
       if (filteredCategories.length) {
         const categories = filteredCategories.map((item) => item.name);
         const filteredProducts = array.filter(
-          (product) => categories.includes(product.category) && product.rating >= minRating && product.rating < minRating + 1
+          (product) => categories.includes(product.category) && product.rating >= minRating
         );
         setArr([...filteredProducts.slice(0, perPageValue)])
       }
       else {
         const filteredProducts = array.filter(
-          (product) => product.rating >= minRating && product.rating < minRating + 1
+          (product) => product.rating >= minRating
         );
         setArr([...filteredProducts.slice(0, perPageValue)])
       }
@@ -213,6 +216,7 @@ const ClothingAndAccessories = () => {
   };
 
   const handlePerPageValue = (e) => {
+    setCurrentPage(1);
     setperPageValue(e.target.value);
     setPerPage(false);
     if (isCategory || isRating) {
@@ -241,13 +245,13 @@ const ClothingAndAccessories = () => {
       if (filteredCategories.length) {
         const categories = filteredCategories.map((item) => item.name);
         const filteredProducts = array.filter(
-          (product) => categories.includes(product.category) && product.rating >= minRating && product.rating < minRating + 1
+          (product) => categories.includes(product.category) && product.rating >= minRating
         );
         setArr([...filteredProducts.slice(0, e.target.value)])
       }
       else {
         const filteredProducts = array.filter(
-          (product) => product.rating >= minRating && product.rating < minRating + 1
+          (product) => product.rating >= minRating
         );
         setArr([...filteredProducts.slice(0, e.target.value)])
       }
@@ -298,7 +302,7 @@ const ClothingAndAccessories = () => {
                     CATEGORY
                   </h4>
                   {category_items.map((data, index) => (
-                    <label className="label">
+                    <label key={index} className="label">
                       <input type="checkbox" value={data.name} checked={data.applied} onChange={(e) => handleFilter(1, index)} />
                       <span>
                         {data.name}
@@ -311,7 +315,7 @@ const ClothingAndAccessories = () => {
                     RATING
                   </h4>
                   {rating_items.map((data, index) => (
-                    <label className="label">
+                    <label key={index} className="label">
                       <input type="checkbox" value={data.name} checked={data.applied} onChange={(e) => handleFilter(2, index)} />
                       <span>
                         {data.name}
@@ -343,7 +347,7 @@ const ClothingAndAccessories = () => {
                 CATEGORY
               </h4>
               {showCategory && category_items.map((data, index) => (
-                <label>
+                <label key={index}>
                   <input type="checkbox" value={data.name} checked={data.applied} onChange={(e) => handleFilter(1, index)} />
                   <span>
                     {data.name}
@@ -356,7 +360,7 @@ const ClothingAndAccessories = () => {
                 RATINGS
               </h4>
               {showRating && rating_items.map((data, index) => (
-                <label>
+                <label key={index}>
                   <input type="checkbox" value={data.name} checked={data.applied} onChange={(e) => handleFilter(2, index)} />
                   <span>
                     {data.name}
@@ -399,7 +403,7 @@ const ClothingAndAccessories = () => {
           </span>
         </div>
         <div>
-          <Pagination currentPage={currentPage} totalCount={(isCategory || isRating) ? eval(fillProd / (perPageValue / 12)) : eval(array.length / (perPageValue / 12))} onPageChange={page => setCurrentPage(page)} />
+          <Pagination currentPage={currentPage} totalCount={(isCategory || isRating) ? fillProd / (perPageValue / 12) : array.length / (perPageValue / 12)} onPageChange={page => setCurrentPage(page)} />
         </div>
         <div className="thirdDiv">
           <div>

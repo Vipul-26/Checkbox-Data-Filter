@@ -16,7 +16,7 @@ const Pagination = ({ currentPage, totalCount, onPageChange }) => {
         return (_) => {
             window.removeEventListener("resize", handleResize);
         };
-    }, [window.innerWidth]);
+    }, []);
 
     useEffect(() => {
         setTotalPages(Math.ceil(totalRecords / 12));
@@ -75,7 +75,7 @@ const Pagination = ({ currentPage, totalCount, onPageChange }) => {
         <div>
             {width < 1279 ?
                 <div className='mobPaginationMainDiv'>
-                    <a href="javascript:void(0)" className={`paginationPrevNext ${prevDisabled}`} onClick={onPrevious}>
+                    <a href="#!" className={`paginationPrevNext ${prevDisabled}`} onClick={onPrevious}>
                         <ButtonArrow height='17px' width='17px' className='prevArrow' />
                         Back
                     </a>
@@ -84,21 +84,21 @@ const Pagination = ({ currentPage, totalCount, onPageChange }) => {
                             {`${currentPage}/${totalPages}`}
                         </div>
                     </div>
-                    <a href="javascript:void(0)" className={`paginationPrevNext ${nextDisabled}`} onClick={onNext}>
+                    <a href="#!" className={`paginationPrevNext ${nextDisabled}`} onClick={onNext}>
                         Next
                         <ButtonArrow height='17px' width='17px' className='nextArrow' />
                     </a>
                 </div>
                 :
                 <div className='dskPagination'>
-                    <a href="javascript:void(0)" className={`paginationPrevNext ${prevDisabled}`} onClick={onPrevious}>
+                    <a href="#!" className={`paginationPrevNext ${prevDisabled}`} onClick={onPrevious}>
                         <ButtonArrow height='17px' width='17px' className='prevArrow' />
                         Back
                     </a>
                     {rangeData?.map(index => {
                         const activeClass = currentPage === index ? 'currentPage' : 'normalPage';
                         return typeof index === 'number' ? (
-                            <a href="javascript:void(0)" className={`${activeClass}`} onClick={() => { onPageChange(index); document.documentElement.scrollTop = 0; }}>
+                            <a key={index} href="#!" className={`${activeClass}`} onClick={() => { onPageChange(index); document.documentElement.scrollTop = 0; }}>
                                 {index}
                             </a>
                         ) : (
@@ -107,7 +107,7 @@ const Pagination = ({ currentPage, totalCount, onPageChange }) => {
                             </span>
                         );
                     })}
-                    <a href="javascript:void(0)" className={`paginationPrevNext ${nextDisabled}`} onClick={onNext}>
+                    <a href="#!" className={`paginationPrevNext ${nextDisabled}`} onClick={onNext}>
                         Next
                         <ButtonArrow height='17px' width='17px' className='nextArrow' />
                     </a>
