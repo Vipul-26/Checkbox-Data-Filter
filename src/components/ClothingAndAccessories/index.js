@@ -376,7 +376,7 @@ const ClothingAndAccessories = () => {
               Showing {firstPage} - {fillProd > lastPage ? lastPage : fillProd} of{" "} {fillProd} results
             </p>
             <div className="filterImg">
-              <img src={filterImage} alt="filter" />
+              <img src={filterImage} alt="filter" title="filter" />
               <p onClick={handleModal}>
                 Filters
               </p>

@@ -31,7 +31,7 @@ const Header = () => {
       <div className="header" id="header">
         <div className="logo">
           <a href="/">
-            <img src={flipkartLogo} className="logoimage" alt="flipkart" />
+            <img src={flipkartLogo} className="logoimage" title="flipkartlogo" alt="flipkart" />
           </a>
           <a href="/" className="underline">
             <span className="exploreText">
@@ -40,7 +40,7 @@ const Header = () => {
             <span className="plusText">
               Plus
             </span>
-            <img src={goldenStar} className="goldenStar" alt="star" />
+            <img src={goldenStar} className="goldenStar" title="star" alt="star" />
           </a>
         </div>
         <div className='searchContainer'>
@@ -80,7 +80,7 @@ const Header = () => {
         <div className='subDiv'>
           <div className="logo">
             <a href="/">
-              <img src={flipkartLogo} className="logoimage" alt="flipkart" />
+              <img src={flipkartLogo} className="logoimage" title="flipkartlogo" alt="flipkart" />
             </a>
             <a href="/" className="underline">
               <span className="exploreText">
@@ -89,7 +89,7 @@ const Header = () => {
               <span className="plusText">
                 Plus
               </span>
-              <img src={goldenStar} className="goldenStar" alt="star" />
+              <img src={goldenStar} className="goldenStar" title="star" alt="star" />
             </a>
           </div>
           <div className='subDivTwo'>

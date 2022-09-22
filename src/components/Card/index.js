@@ -4,7 +4,7 @@ import "./card.css";
 const Card = (props) => {
   return (
     <div className="product">
-      <img src={props.image} alt={props.title} />
+      <img src={props.image} alt={props.title} loading="lazy" title={props.title} />
       <p className="shorten">
         {props.title}
       </p>
