@@ -11,14 +11,14 @@ const Card = (props) => {
       <p className="shorten description">
         {props.description}
       </p>
-      <h6 className="h6">
+      <h5 className="h6">
         <span className="rating">
           {props.rating} <i className="fa fa-star"></i>
         </span>
         <span className="description">
           ({props.rating_count})
         </span>
-      </h6>
+      </h5>
       <h6 className="price">
         <span style={{ fontSize: "small" }}>
           $ {props.price}
