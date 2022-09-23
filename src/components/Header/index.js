@@ -50,7 +50,7 @@ const Header = () => {
               placeholder={'Search for products, brands and more'}
             />
             <div className="searchIconContainer">
-              <IoIosSearch style={{ color: '#2874f0', fontSize: '20px', strokeWidth: '25px' }} />
+              <IoIosSearch style={{ color: '#156EF4', fontSize: '20px', strokeWidth: '25px' }} />
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@ const Header = () => {
           </div>
           <div className='subDivTwo'>
             <div className='cartContainer'>
-              <a href="/" className="cart">
+              <a href="/" className="cart" aria-label='cart'>
                 <IoIosCart style={{ fontSize: '18px', strokeWidth: '25px' }} />
               </a>
             </div>
@@ -108,7 +108,7 @@ const Header = () => {
         <div className='searchContainer'>
           <div className="searchInputContainer">
             <div className="searchIconContainer">
-              <IoIosSearch style={{ color: '#2874f0', fontSize: '20px', strokeWidth: '25px' }} />
+              <IoIosSearch style={{ color: '#156EF4', fontSize: '20px', strokeWidth: '25px' }} />
             </div>
             <input
               className="searchInput"
