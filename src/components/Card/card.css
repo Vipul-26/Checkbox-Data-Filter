@@ -50,7 +50,7 @@
 }
 
 .price>* {
-  padding: 0.2rem;
+  padding: 0.2rem 0.1rem;
   font-weight: bold;
 }
 
@@ -63,6 +63,7 @@
   color: grey;
   font-weight: lighter;
   text-decoration: line-through;
+  font-size: 16px;
 }
 
 .product:hover {
@@ -72,7 +73,7 @@
 
 @media screen and (min-width: 1280px) and (max-width: 1480px) {
   .price>* {
-    font-size: medium;
+    font-size: small !important;
   }
 
   .offer {
@@ -85,14 +86,11 @@
 
   .product {
     height: 305px;
-  }
-
-  .price span:first-child {
-    font-size: medium !important;
+    margin-bottom: 1.5rem;
   }
 
   .product img {
-    margin-left: 10%;
+    margin-left: 0%;
   }
 }
 
@@ -130,6 +128,7 @@
   .product img {
     width: 9rem;
     height: 9rem;
+    margin-left: 2%;
   }
 }
 
@@ -163,12 +162,10 @@
   .product img {
     width: 6rem;
     height: 6rem;
-    margin-left: 15%;
+    margin-left: 8%;
   }
 
   .price>* {
-    padding-left: 0.1rem;
-    padding-right: 0.1rem;
     font-size: 13px !important;
   }
 }

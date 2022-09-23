@@ -8,8 +8,8 @@ const Card = (props) => {
     <div className="product">
       <LazyLoadImage
         alt={props.title}
-        // width={350}
-        // height={150}
+        width={200}
+        height={80}
         src={props.image}
         effect="blur"
       />
