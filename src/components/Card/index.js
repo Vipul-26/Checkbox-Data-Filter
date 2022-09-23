@@ -1,10 +1,16 @@
 import React from "react";
 import "./card.css";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const Card = (props) => {
   return (
     <div className="product">
-      <img src={props.image} alt={props.title} loading="lazy" title={props.title} />
+      {/* <img src={props.image} alt={props.title} loading="lazy" title={props.title} /> */}
+      <LazyLoadImage
+        alt={props.title}
+        height={400}
+        src={props.image}
+        width={400} />
       <p className="shorten">
         {props.title}
       </p>
