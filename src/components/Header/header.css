@@ -160,6 +160,7 @@
 
 .mobHeader {
   display: none;
+  z-index: 1;
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1279px) {

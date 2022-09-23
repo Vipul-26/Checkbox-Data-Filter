@@ -1,16 +1,18 @@
 import React from "react";
 import "./card.css";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Card = (props) => {
   return (
     <div className="product">
-      {/* <img src={props.image} alt={props.title} loading="lazy" title={props.title} /> */}
       <LazyLoadImage
         alt={props.title}
-        height={400}
+        // width={350}
+        // height={150}
         src={props.image}
-        width={400} />
+        effect="blur"
+      />
       <p className="shorten">
         {props.title}
       </p>
