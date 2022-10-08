@@ -1,6 +1,7 @@
 .content {
   display: flex;
   min-height: 100vh;
+  margin-top: 3.4rem;
 }
 
 .filter {

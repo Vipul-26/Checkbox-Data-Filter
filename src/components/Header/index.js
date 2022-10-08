@@ -28,7 +28,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="header" id="header">
+      <div className="header sticky" id="header">
         <div className="logo">
           <a href="/">
             <img src={flipkartLogo} className="logoimage" title="flipkartlogo" alt="flipkart" width={75} height={20} />
@@ -76,7 +76,7 @@ const Header = () => {
           </a>
         </div>
       </div>
-      <div className="mobHeader" id="mobHeader">
+      <div className="mobHeader sticky" id="mobHeader">
         <div className='subDiv'>
           <div className="logo">
             <a href="/">
