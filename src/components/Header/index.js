@@ -13,10 +13,10 @@ const Header = () => {
     const mobSticky = mobHeader.offsetTop;
     const onScroll = () => {
       if (window.pageYOffset > sticky || window.pageXOffset > mobSticky) {
-        header.classList.add("sticky");
+        // header.classList.add("sticky");
         mobHeader.classList.add("sticky");
       } else {
-        header.classList.remove("sticky");
+        // header.classList.remove("sticky");
         mobHeader.classList.add("sticky");
       }
     }
