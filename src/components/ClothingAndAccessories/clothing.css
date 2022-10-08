@@ -288,6 +288,10 @@ input[type="checkbox"]:hover {
 }
 
 @media screen and (max-width: 767px) {
+  .content {
+    margin-top: 6.2rem;
+  }
+
   .filter {
     display: none;
   }
@@ -322,7 +326,6 @@ input[type="checkbox"]:hover {
   .cards {
     width: 100%;
     justify-content: center;
-    /* margin-top: 6.5rem; */
   }
 
   .text {
