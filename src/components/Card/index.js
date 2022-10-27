@@ -29,13 +29,13 @@ const Card = (props) => {
       </h5>
       <h6 className="price">
         <span style={{ fontSize: "small" }}>
-          $ {props.price}
+          $ {props.price - Math.trunc(Math.round((props.price) * props.discountPercentage) / 100)}
         </span>
         <span className="mrp">
-          $ {(props.price / 20).toFixed(2)}
+          $ {props.price}
         </span>
         <span className="offer">
-          {props.offer}% off
+          {props.discountPercentage}% off
         </span>
       </h6>
     </div>

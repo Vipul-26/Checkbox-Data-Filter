@@ -47,7 +47,7 @@
   width: fit-content;
 }
 
-.filter-body label:nth-child(5) {
+.filter-body label:last-child {
   padding-bottom: 0.6rem;
 }
 

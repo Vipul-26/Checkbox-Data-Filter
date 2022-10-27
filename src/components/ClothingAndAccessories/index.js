@@ -388,10 +388,10 @@ const ClothingAndAccessories = () => {
               title={product.title}
               description={product.description}
               price={product.price}
-              image={product.image}
+              image={product.images[0]}
               rating={product.rating}
               rating_count={product.rating_count}
-              offer={product.offer}
+              discountPercentage={product.discountPercentage}
             />
           ))}
         </div>
